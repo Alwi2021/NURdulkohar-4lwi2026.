@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin - NURdulkohar</title>
+    <style>
+        body { background: #000; color: #fff; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; font-family: sans-serif; }
+        /* Efek Kotak Kuning Emas Bercahaya & Bergerak */
+        .admin-panel { 
+            border: 3px solid #ffd700; 
+            padding: 40px; 
+            border-radius: 20px; 
+            text-align: center;
+            box-shadow: 0 0 20px #ffd700; 
+            animation: glow 1.5s infinite alternate; 
+        }
+        @keyframes glow {
+            from { box-shadow: 0 0 10px #ffd700; transform: scale(1); }
+            to { box-shadow: 0 0 30px #ffd700; transform: scale(1.02); border-color: #fff; }
+        }
+        h1 { color: #ffd700; text-shadow: 2px 2px #000; letter-spacing: 2px; }
+        input { padding: 12px; width: 80%; border-radius: 8px; border: 2px solid #ffd700; margin-top: 15px; text-align: center; font-size: 18px; background: #222; color: #fff; }
+        button { margin-top: 25px; padding: 12px 30px; background: #ffd700; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 16px; color: #000; }
+    </style>
+</head>
+<body>
+    <div class="admin-panel">
+        <h1>OTORITAS NUR</h1>
+        <p style="color: #ffd700;">PUSAT KENDALI MAKRIFAT</p>
+        <hr style="border: 0.5px solid #ffd700; width: 50%;">
+        <input type="password" id="pass" placeholder="MASUKKAN KODE">
+        <br>
+        <button onclick="check()">BUKA PINTU</button>
+    </div>
+
+    <script>
+        function check() {
+            let k = document.getElementById('pass').value;
+            if(k === '000555') {
+                alert('Akses Diterima, Bapak Jamhari. Selamat Datang!');
+                // Jalur menuju DATABASE.txt
+            } else {
+                alert('AKSES DITOLAK! BUKAN OTORITAS NUR.');
+            }
+        }
+    </script>
+</body>
+</html>
