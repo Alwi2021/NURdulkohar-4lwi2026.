@@ -18,8 +18,11 @@
 
 <div class="box">
     <h2>Indramayu Club</h2>
-    <p>Pendaftaran Member Baru</p>
-    
+
+    <div style="background: yellow; color: black; padding: 10px; font-weight: bold; border: 2px solid red; margin-bottom: 20px; text-align: center;">
+        ⚠️ PERINGATAN: Masuklah dengan hati yang bersih. Segala aktivitas diawasi oleh Otoritas Nur.
+    </div>
+
     <form id="regForm">
         <input type="text" placeholder="Nama Lengkap" required>
         
@@ -29,10 +32,12 @@
             <option value="Perempuan">Perempuan</option>
         </select>
 
-        <input type="number" id="age" placeholder="Masukkan Umur Anda" required>
-        
-        <button type="submit">Pasang Lencana Otomatis</button>
+        <input type="number" id="age" placeholder="Masukkan Umur" required>
+
+        <button type="submit">PASANG LENCANA OTOMATIS</button>
     </form>
+</div>
+
 
     <div id="badge"></div>
 
