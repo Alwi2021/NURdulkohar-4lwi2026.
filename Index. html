@@ -23,7 +23,7 @@
         ⚠️ PERINGATAN: Masuklah dengan hati yang bersih. Segala aktivitas diawasi oleh Otoritas Nur.
     </div>
 
-    <form id="regForm">
+    <form id=
         <input type="text" placeholder="Nama Lengkap" required>
         
         <select id="gender" required>
@@ -38,13 +38,11 @@
     </form>
 </div>
 
-
-    <div id="badge"></div>
+<div id="badge"></div>
 
     <div class="footer">
         Diawasi oleh Sistem Nur &copy; 2026
     </div>
-</div>
 
 <script>
     document.getElementById('regForm').addEventListener('submit', function(e) {
