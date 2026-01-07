@@ -3,92 +3,151 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KENDALI NUR - INDRAMAYU CLUB</title>
+    <title>OTORITAS NUR - PANEL KENDALI</title>
     <style>
-        body { background-color: #050505; color: #ffd700; font-family: 'Courier New', Courier, monospace; padding: 20px; }
-        .admin-box { border: 1px solid #ffd700; padding: 20px; border-radius: 10px; max-width: 800px; margin: auto; }
-        .stats { display: flex; justify-content: space-around; margin-bottom: 20px; font-size: 0.8em; color: #fff; border-bottom: 1px solid #333; padding-bottom: 10px; }
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        th, td { border: 1px solid #333; padding: 12px; text-align: left; font-size: 0.9em; }
-        th { background: #111; color: #ffd700; }
-        .btn-wa { background: #25d366; color: #fff; padding: 5px 10px; text-decoration: none; border-radius: 5px; font-size: 0.8em; }
-        #login-screen { text-align: center; margin-top: 100px; }
-        .badge-l { color: #00c8ff; } /* Biru untuk Lelaki */
-        .badge-p { color: #ff0077; } /* Pink untuk Perempuan */
+        :root {
+            --deep-blue: #001220;
+            --fb-blue: #083d77;
+            --neon-cyan: #00f2ff;
+            --text-silver: #cfd8dc;
+        }
+
+        body {
+            background-color: #010409;
+            color: var(--text-silver);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding-bottom: 50px;
+        }
+
+        /* Header Gaya Facebook Futuristik */
+        .header {
+            background: linear-gradient(135deg, var(--deep-blue), var(--fb-blue));
+            padding: 20px;
+            text-align: center;
+            border-bottom: 2px solid var(--fb-blue);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.8);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header h2 { margin: 0; letter-spacing: 4px; color: #fff; text-shadow: 0 0 10px var(--neon-cyan); }
+
+        /* Layar Kunci */
+        #login-screen { text-align: center; padding-top: 100px; }
+        .input-code {
+            background: #0d1117;
+            border: 1px solid var(--fb-blue);
+            color: var(--neon-cyan);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.2em;
+            outline: none;
+        }
+
+        /* Container Member Gaya Messenger */
+        .container { max-width: 500px; margin: 20px auto; padding: 10px; }
+        
+        .member-card {
+            background: #0d1117;
+            border: 1px solid #21262d;
+            border-left: 4px solid var(--fb-blue);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: 0.3s;
+        }
+
+        .member-card:hover {
+            border-color: var(--neon-cyan);
+            background: #161b22;
+            transform: scale(1.02);
+        }
+
+        .info h4 { margin: 0; color: #fff; font-size: 1.1em; }
+        .info p { margin: 5px 0 0; font-size: 0.85em; color: #8b949e; }
+
+        .lencana {
+            width: 50px;
+            height: 50px;
+            background: var(--deep-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            border: 1px solid var(--fb-blue);
+        }
+
+        .btn-action {
+            background: var(--fb-blue);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
 
     <div id="login-screen">
-        <h2>OTORITAS NUR</h2>
-        <input type="password" id="pass" placeholder="KODE AKSES" style="padding: 10px; text-align: center;">
-        <br><br>
-        <button onclick="checkAccess()" style="padding: 10px 20px; cursor: pointer;">MASUK</button>
+        <h2>NUR LOGIN</h2>
+        <p style="color: #555;">KODE OTORITAS DIPERLUKAN</p>
+        <input type="password" id="pass" class="input-code" placeholder="· · · · · ·">
+        <br>
+        <button class="btn-action" onclick="masuk()">BUKA AKSES</button>
     </div>
 
-    <div id="admin-panel" class="admin-box" style="display: none;">
-        <h3>PANEL KENDALI MEMBER</h3>
-        <div class="stats">
-            <div>TOTAL: <span id="total-m">0</span></div>
-            <div>LELAKI: <span id="total-l" class="badge-l">0</span></div>
-            <div>PEREMPUAN: <span id="total-p" class="badge-p">0</span></div>
+    <div id="admin-panel" style="display: none;">
+        <div class="header">
+            <h2>NUR <span style="font-weight: 100;">ADMIN</span></h2>
         </div>
 
-        <table id="member-table">
-            <thead>
-                <tr>
-                    <th>NAMA</th>
-                    <th>UMUR</th>
-                    <th>LENCANA</th>
-                    <th>AKSI</th>
-                </tr>
-            </thead>
-            <tbody id="data-list">
-                </tbody>
-        </table>
+        <div class="container" id="member-list">
+            </div>
     </div>
 
     <script>
-        // KUNCI UTAMA
-        function checkAccess() {
-            const code = document.getElementById('pass').value;
-            if(code === "000555") {
+        function masuk() {
+            const kode = document.getElementById('pass').value;
+            if(kode === "000555") {
                 document.getElementById('login-screen').style.display = "none";
                 document.getElementById('admin-panel').style.display = "block";
-                loadData();
+                tampilkanData();
             } else {
-                alert("AKSES DITOLAK!");
+                alert("Akses Ditolak. Protokol Ghost Aktif.");
             }
         }
 
-        // SIMULASI LOAD DATA (Nantinya tersambung ke database.txt)
-        function loadData() {
-            // Contoh data yang masuk dari form depan
+        function tampilkanData() {
+            // Contoh data simulasi dari Google Keep
             const members = [
-                {nama: "Budi", umur: "25", gender: "Lelaki", wa: "628xxx"},
-                {nama: "Siti", umur: "22", gender: "Perempuan", wa: "628xxx"}
+                {nama: "Jamhari", gender: "Lelaki", umur: 35, lencana: "🛡️"},
+                {nama: "Siti Nur", gender: "Perempuan", umur: 28, lencana: "💎"}
             ];
 
-            const list = document.getElementById('data-list');
-            let lCount = 0; let pCount = 0;
+            const list = document.getElementById('member-list');
+            list.innerHTML = "";
 
             members.forEach(m => {
-                const isLelaki = m.gender === "Lelaki";
-                if(isLelaki) lCount++; else pCount++;
-
                 list.innerHTML += `
-                    <tr>
-                        <td>${m.nama}</td>
-                        <td>${m.umur}</td>
-                        <td class="${isLelaki ? 'badge-l' : 'badge-p'}">${isLelaki ? '🛡️ Ksatria' : '💎 Cahaya'}</td>
-                        <td><a href="https://wa.me/${m.wa}" class="btn-wa">HUBUNGI</a></td>
-                    </tr>
+                    <div class="member-card">
+                        <div class="info">
+                            <h4>${m.nama}</h4>
+                            <p>${m.gender} • ${m.umur} Tahun</p>
+                        </div>
+                        <div class="lencana">${m.lencana}</div>
+                    </div>
                 `;
             });
-
-            document.getElementById('total-m').innerText = members.length;
-            document.getElementById('total-l').innerText = lCount;
-            document.getElementById('total-p').innerText = pCount;
         }
     </script>
 </body>
