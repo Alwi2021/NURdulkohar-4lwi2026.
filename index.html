@@ -3,64 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daftar Member - Indramayu Club</title>
+    <title>INDRAMAYU CLUB - AKTIVASI NUR</title>
     <style>
-        body { font-family: sans-serif; background-color: #f0f2f5; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
-        .box { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 100%; max-width: 380px; text-align: center; }
-        h2 { color: #1a73e8; margin-bottom: 10px; }
-        input, select { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; font-size: 14px; }
-        button { width: 100%; padding: 12px; background-color: #1a73e8; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; margin-top: 10px; }
-        .footer { margin-top: 20px; font-size: 12px; color: #888; }
-        #badge { margin-top: 15px; padding: 10px; border-radius: 6px; display: none; font-weight: bold; }
+        body { background-color: #000; color: #ffd700; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; text-align: center; padding: 40px 20px; }
+        .card { border: 2px solid #ffd700; padding: 25px; border-radius: 20px; box-shadow: 0 0 30px rgba(255, 215, 0, 0.3); display: inline-block; max-width: 350px; width: 100%; background: #0a0a0a; }
+        h1 { letter-spacing: 8px; margin-bottom: 5px; color: #fff; text-shadow: 0 0 10px #ffd700; }
+        .sub-title { font-size: 0.8em; margin-bottom: 25px; color: #ffd700; text-transform: uppercase; }
+        
+        /* Gaya Input Nur */
+        input, select { width: 90%; padding: 12px; margin: 10px 0; background: #1a1a1a; color: #fff; border: 1px solid #444; border-radius: 8px; outline: none; transition: 0.3s; }
+        input:focus, select:focus { border-color: #ffd700; box-shadow: 0 0 10px #ffd700; }
+        
+        /* Desain Lencana */
+        .badge-preview { margin-top: 20px; padding: 15px; border-radius: 10px; display: none; background: #111; border: 1px dashed #ffd700; }
+        .badge-icon { font-size: 40px; margin-bottom: 5px; }
+        .badge-text { font-weight: bold; font-size: 1.1em; }
+
+        button { background: linear-gradient(45deg, #ffd700, #b8860b); color: #000; border: none; padding: 15px; font-weight: bold; cursor: pointer; border-radius: 8px; width: 100%; margin-top: 25px; font-size: 1em; transition: 0.3s; }
+        button:hover { transform: scale(1.03); box-shadow: 0 0 20px #ffd700; }
     </style>
 </head>
 <body>
 
-<div class="box">
-    <h2>Indramayu Club</h2>
-
-    <div style="background: yellow; color: black; padding: 10px; font-weight: bold; border: 2px solid red; margin-bottom: 20px; text-align: center;">
-        ⚠️ PERINGATAN: Masuklah dengan hati yang bersih. Segala aktivitas diawasi oleh Otoritas Nur.
-    </div>
-
-    <form id=
-        <input type="text" placeholder="Nama Lengkap" required>
+    <div class="card">
+        <h1>NUR</h1>
+        <div class="sub-title">Otoritas Indramayu Club</div>
         
-        <select id="gender" required>
+        <input type="text" id="nama" placeholder="Nama Lengkap" oninput="updatePreview()">
+        <input type="number" id="umur" placeholder="Umur" oninput="updatePreview()">
+        <select id="gender" onchange="updatePreview()">
             <option value="">Pilih Jenis Kelamin</option>
             <option value="Lelaki">Lelaki</option>
             <option value="Perempuan">Perempuan</option>
         </select>
 
-        <input type="number" id="age" placeholder="Masukkan Umur" required>
-
-        <button type="submit">PASANG LENCANA OTOMATIS</button>
-    </form>
-</div>
-
-<div id="badge"></div>
-
-    <div class="footer">
-        Diawasi oleh Sistem Nur &copy; 2026
+        <div id="preview" class="badge-preview">
+            <div id="badge-icon" class="badge-icon"></div>
+            <div id="badge-name" class="badge-text"></div>
+            <div id="badge-status" style="font-size: 0.9em; color: #aaa;"></div>
+        </div>
+        
+        <button onclick="prosesAktivasi()">AKTIFKAN LENCANA SEKARANG</button>
     </div>
 
-<script>
-    document.getElementById('regForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const gender = document.getElementById('gender').value;
-        const age = document.getElementById('age').value;
-        const badgeDiv = document.getElementById('badge');
-        
-        let lencana = gender === "Lelaki" ? "LENCANA BIRU SATRIA" : "LENCANA HIJAU SRIKANDI";
-        let warna = gender === "Lelaki" ? "#e3f2fd" : "#f1f8e9";
-        let teksWarna = gender === "Lelaki" ? "#1565c0" : "#2e7d32";
+    <script>
+        function updatePreview() {
+            const nama = document.getElementById('nama').value;
+            const gender = document.getElementById('gender').value;
+            const preview = document.getElementById('preview');
+            const icon = document.getElementById('badge-icon');
+            const status = document.getElementById('badge-status');
+            
+            if (nama && gender) {
+                preview.style.display = "block";
+                document.getElementById('badge-name').innerText = nama.toUpperCase();
+                
+                if (gender === "Lelaki") {
+                    icon.innerHTML = "🛡️"; // Lencana Lelaki (Perisai/Knight)
+                    status.innerText = "Ksatria Nur - Aktif";
+                    icon.style.color = "#00c8ff";
+                } else {
+                    icon.innerHTML = "💎"; // Lencana Perempuan (Permata/Queen)
+                    status.innerText = "Cahaya Nur - Aktif";
+                    icon.style.color = "#ff0077";
+                }
+            } else {
+                preview.style.display = "none";
+            }
+        }
 
-        badgeDiv.style.display = "block";
-        badgeDiv.style.backgroundColor = warna;
-        badgeDiv.style.color = teksWarna;
-        badgeDiv.innerHTML = "Selamat! Anda mendapatkan:<br>" + lencana + "<br>(Umur: " + age + " Tahun)";
-    });
-</script>
+        function prosesAktivasi() {
+            const nama = document.getElementById('nama').value;
+            const umur = document.getElementById('umur').value;
+            const gender = document.getElementById('gender').value;
+            
+            if(!nama || !umur || !gender) {
+                alert("Lengkapi data Anda untuk memunculkan Lencana Nur.");
+                return;
+            }
 
+            // Ghost Protocol: Nomor Admin Tersembunyi
+            const otoritas = "6281386517352";
+            const lencana = (gender === "Lelaki") ? "🛡️ [Ksatria Nur]" : "💎 [Cahaya Nur]";
+            const teks = `SAYA INGIN AKTIVASI NUR.\n\nNama: ${nama}\nUmur: ${umur}\nGender: ${gender}\nLencana: ${lencana}\n\nMohon validasi akses saya di Indramayu Club.`;
+            
+            window.location.href = `https://wa.me/${otoritas}?text=${encodeURIComponent(teks)}`;
+        }
+    </script>
 </body>
 </html>
