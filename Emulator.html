@@ -1,57 +1,3 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Indramayu Club - Emulator Engine</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
-        
-        body { 
-            background-color: #020617; 
-            color: #e2e8f0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-image: radial-gradient(circle at center, #1e293b 0%, #020617 100%);
-            min-height: 100vh;
-        }
-
-        .font-game { font-family: 'Orbitron', sans-serif; }
-
-        /* Efek Scanline Emulator */
-        .emulator-card::before {
-            content: " ";
-            display: block;
-            position: absolute;
-            top: 0; left: 0; bottom: 0; right: 0;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
-                        linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
-            z-index: 2;
-            background-size: 100% 2px, 3px 100%;
-            pointer-events: none;
-        }
-
-        .neon-glow {
-            box-shadow: 0 0 15px rgba(34, 211, 238, 0.3);
-            border: 1px solid rgba(34, 211, 238, 0.5);
-        }
-    </style>
-</head>
-<body class="p-4">
-
-    <div class="max-w-md mx-auto mt-4 mb-8">
-        <div class="flex justify-between items-end border-b border-cyan-500/30 pb-4">
-            <div>
-                <h1 class="font-game text-cyan-400 text-xl tracking-widest">NUR-ENGINE</h1>
-                <p class="text-[10px] text-slate-400 uppercase tracking-widest">System: Game Konsul Emulator</p>
-            </div>
-            <div class="text-right">
-                <p class="text-[9px] text-yellow-500 font-bold uppercase">Token Koin</p>
-                <div id="display-koin" class="font-game text-lg text-white">🪙 Loading..</div>
-            </div>
-        </div>
-    </div>
-
     <div class="max-w-md mx-auto space-y-6">
         
         <div class="emulator-card relative bg-slate-900 rounded-3xl p-6 overflow-hidden neon-glow group">
@@ -100,3 +46,5 @@
     </script>
 </body>
 </html>
+
+
