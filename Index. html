@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Indramayu Club - Emulator Engine</title>
+    <title>Indramayu Club - Pusat Makrifat</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
@@ -11,101 +11,95 @@
         body { 
             background-color: #020617; 
             color: #e2e8f0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-image: radial-gradient(circle at center, #1e293b 0%, #020617 100%);
+            font-family: 'Segoe UI', sans-serif;
+            background-image: radial-gradient(circle at top right, #1e1b4b 0%, #020617 100%);
             min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
-        .font-game { font-family: 'Orbitron', sans-serif; }
+        .font-nur { font-family: 'Orbitron', sans-serif; }
 
-        /* Efek Scanline Emulator */
-        .emulator-card::before {
-            content: " ";
-            display: block;
+        .btn-portal {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .btn-portal:hover {
+            border-color: #22d3ee;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(34, 211, 238, 0.1);
+        }
+
+        /* Animasi Aura */
+        .aura {
             position: absolute;
-            top: 0; left: 0; bottom: 0; right: 0;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
-                        linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
-            z-index: 2;
-            background-size: 100% 2px, 3px 100%;
-            pointer-events: none;
-        }
-
-        .neon-glow {
-            box-shadow: 0 0 15px rgba(34, 211, 238, 0.3);
-            border: 1px solid rgba(34, 211, 238, 0.5);
+            width: 200px;
+            height: 200px;
+            background: #22d3ee;
+            filter: blur(120px);
+            opacity: 0.1;
+            z-index: -1;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
     </style>
 </head>
-<body class="p-4">
+<body class="p-6">
 
-    <div class="max-w-md mx-auto mt-4 mb-8">
-        <div class="flex justify-between items-end border-b border-cyan-500/30 pb-4">
-            <div>
-                <h1 class="font-game text-cyan-400 text-xl tracking-widest">NUR-ENGINE</h1>
-                <p class="text-[10px] text-slate-400 uppercase tracking-widest">System: Game Konsul Emulator</p>
-            </div>
-            <div class="text-right">
-                <p class="text-[9px] text-yellow-500 font-bold uppercase">Token Koin</p>
-                <div id="display-koin" class="font-game text-lg text-white">0.00</div>
-            </div>
+    <div class="aura"></div>
+
+    <div class="max-w-md mx-auto text-center mb-12">
+        <div class="mb-4 inline-block p-3 rounded-full bg-cyan-500/10 border border-cyan-500/20">
+            <svg class="w-8 h-8 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
         </div>
+        <h1 class="font-nur text-2xl text-white tracking-[0.3em] uppercase">Indramayu Club</h1>
+        <p class="text-[10px] text-cyan-500 tracking-widest mt-2 font-bold uppercase">Main Control Interface v1.0</p>
     </div>
 
-    <div class="max-w-md mx-auto space-y-6">
+    <div class="max-w-md mx-auto space-y-4">
         
-        <div class="emulator-card relative bg-slate-900 rounded-3xl p-6 overflow-hidden neon-glow group">
-            <div class="relative z-10">
-                <div class="flex justify-between items-start mb-6">
-                    <h2 class="font-game text-lg text-white">PS2-CORE</h2>
-                    <span class="text-[9px] bg-cyan-500 text-black px-2 py-0.5 rounded font-bold uppercase">Ready</span>
+        <a href="Emulator.html" class="btn-portal block p-6 rounded-3xl relative group overflow-hidden">
+            <div class="flex justify-between items-center relative z-10">
+                <div>
+                    <h2 class="font-nur text-sm text-white group-hover:text-cyan-400 transition-colors">GAME EMULATOR</h2>
+                    <p class="text-[10px] text-slate-500 mt-1 uppercase">PS2 • PSP • RETRO SYSTEM</p>
                 </div>
-                
-                <div class="grid grid-cols-2 gap-2 mb-6 text-[10px] text-slate-400 uppercase">
-                    <div class="bg-black/40 p-2 rounded-lg border border-white/5 tracking-tighter">Naruto Ship. 5</div>
-                    <div class="bg-black/40 p-2 rounded-lg border border-white/5 tracking-tighter">Basara 2 Hero</div>
-                    <div class="bg-black/40 p-2 rounded-lg border border-white/5 tracking-tighter">GTA San Andreas</div>
-                    <div class="bg-black/40 p-2 rounded-lg border border-white/5 tracking-tighter">PES 2026 Patch</div>
+                <div class="text-cyan-500 opacity-50 group-hover:opacity-100 transition-opacity">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
                 </div>
-
-                <button onclick="requestGame('PS2')" class="w-full bg-cyan-600 hover:bg-cyan-400 text-black font-game text-xs py-4 rounded-2xl transition-all shadow-lg active:scale-95">
-                    DOWNLOAD ZIP / PLAY
-                </button>
             </div>
-        </div>
+        </a>
 
-        <div class="bg-slate-900/40 border border-dashed border-slate-700 rounded-3xl p-6 text-center">
-            <p class="text-slate-500 font-game text-[10px] uppercase tracking-widest">Next Update: Arisan Makrifat Logic</p>
-        </div>
+        <a href="Arisan.html" class="btn-portal block p-6 rounded-3xl relative group overflow-hidden">
+            <div class="flex justify-between items-center relative z-10">
+                <div>
+                    <h2 class="font-nur text-sm text-white group-hover:text-yellow-500 transition-colors">ARISAN MAKRIFAT</h2>
+                    <p class="text-[10px] text-slate-500 mt-1 uppercase">Undian • Slot • Social Game</p>
+                </div>
+                <div class="text-yellow-500 opacity-50 group-hover:opacity-100 transition-opacity">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </div>
+            </div>
+        </a>
 
     </div>
 
-    <div class="max-w-md mx-auto mt-12 text-center space-y-4">
-        <div class="p-4 bg-cyan-950/20 rounded-2xl border border-cyan-900/30">
-            <p class="text-[10px] text-slate-400 mb-1">ADMIN UTAMA - DANA/OVO</p>
-            <p class="font-game text-cyan-500 text-sm">081386517352</p>
-        </div>
-        <p class="text-[9px] text-slate-600 italic">"Penyelarasan teknologi dan spiritualitas Indramayu Club"</p>
+    <div class="max-w-md mx-auto mt-16 text-center">
+        <div class="bg-white/5 h-[1px] w-full mb-6"></div>
+        <p class="text-[9px] text-slate-600 uppercase tracking-widest mb-2 italic">Nur Assistant: "Menjaga Keseimbangan Digital"</p>
+        <p class="text-[10px] text-slate-500 font-bold">OWNER: JAMHARI (ADMIN UTAMA)</p>
     </div>
 
-    <script>
-        // Simulasi Konek ke Google Script Koin
-        async function loadKoin() {
-            // Placeholder: Nanti masukkan URL Google Script Anda di sini
-            const saldoAwal = "150.00"; 
-            document.getElementById('display-koin').innerText = saldoAwal;
-        }
-
-        function requestGame(type) {
-            const adminWA = "6281386517352";
-            const message = encodeURIComponent(`[Nur-Engine] Admin, saya ingin akses Folder ZIP Game ${type}. Mohon verifikasi koin saya.`);
-            
-            // Logika sederhana: Buka WA untuk validasi manual sebelum link ZIP diberikan
-            window.location.href = `https://wa.me/${adminWA}?text=${message}`;
-        }
-
-        // Jalankan saat load
-        window.onload = loadKoin;
-    </script>
 </body>
 </html>
