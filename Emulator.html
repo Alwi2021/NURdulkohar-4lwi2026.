@@ -47,7 +47,7 @@
             </div>
             <div class="text-right">
                 <p class="text-[9px] text-yellow-500 font-bold uppercase">Token Koin</p>
-                <div id="display-koin" class="font-game text-lg text-white">0.00</div>
+                <div id="display-koin" class="font-game text-lg text-white">🪙 Loading..</div>
             </div>
         </div>
     </div>
@@ -62,49 +62,40 @@
                 </div>
                 
                 <div class="grid grid-cols-2 gap-2 mb-6 text-[10px] text-slate-400 uppercase">
-                    <div class="bg-black/40 p-2 rounded-lg border border-white/5 tracking-tighter">Naruto Ship. 5</div>
-                    <div class="bg-black/40 p-2 rounded-lg border border-white/5 tracking-tighter">Basara 2 Hero</div>
-                    <div class="bg-black/40 p-2 rounded-lg border border-white/5 tracking-tighter">GTA San Andreas</div>
-                    <div class="bg-black/40 p-2 rounded-lg border border-white/5 tracking-tighter">PES 2026 Patch</div>
+                    <div class="bg-black/40 p-2 rounded-lg border border-white/5 tracking-tighter text-center">Naruto Ship. 5</div>
+                    <div class="bg-black/40 p-2 rounded-lg border border-white/5 tracking-tighter text-center">Basara 2 Hero</div>
+                    <div class="bg-black/40 p-2 rounded-lg border border-white/5 tracking-tighter text-center">GTA San Andreas</div>
+                    <div class="bg-black/40 p-2 rounded-lg border border-white/5 tracking-tighter text-center">Tekken 5</div>
                 </div>
 
-                <button onclick="requestGame('PS2')" class="w-full bg-cyan-600 hover:bg-cyan-400 text-black font-game text-xs py-4 rounded-2xl transition-all shadow-lg active:scale-95">
-                    DOWNLOAD ZIP / PLAY
+                <button onclick="requestGame('PS2')" class="w-full bg-cyan-600 hover:bg-cyan-400 text-black font-game text-xs py-4 rounded-2xl transition-all shadow-lg active:scale-95 uppercase">
+                    Mulai Main / Sewa
                 </button>
             </div>
         </div>
 
-        <div class="bg-slate-900/40 border border-dashed border-slate-700 rounded-3xl p-6 text-center">
-            <p class="text-slate-500 font-game text-[10px] uppercase tracking-widest">Next Update: Arisan Makrifat Logic</p>
-        </div>
-
-    </div>
-
-    <div class="max-w-md mx-auto mt-12 text-center space-y-4">
-        <div class="p-4 bg-cyan-950/20 rounded-2xl border border-cyan-900/30">
-            <p class="text-[10px] text-slate-400 mb-1">ADMIN UTAMA - DANA/OVO</p>
+        <div class="p-4 bg-cyan-950/20 rounded-2xl border border-cyan-900/30 text-center">
+            <p class="text-[10px] text-slate-400 mb-1">TOP UP KOIN VIA ADMIN</p>
             <p class="font-game text-cyan-500 text-sm">081386517352</p>
         </div>
-        <p class="text-[9px] text-slate-600 italic">"Penyelarasan teknologi dan spiritualitas Indramayu Club"</p>
+
     </div>
 
     <script>
         // Simulasi Konek ke Google Script Koin
         async function loadKoin() {
-            // Placeholder: Nanti masukkan URL Google Script Anda di sini
-            const saldoAwal = "150.00"; 
-            document.getElementById('display-koin').innerText = saldoAwal;
+            // Nanti masukkan URL Google Script Anda di sini
+            setTimeout(() => {
+                document.getElementById('display-koin').innerText = "150.00"; 
+            }, 1000);
         }
 
         function requestGame(type) {
             const adminWA = "6281386517352";
-            const message = encodeURIComponent(`[Nur-Engine] Admin, saya ingin akses Folder ZIP Game ${type}. Mohon verifikasi koin saya.`);
-            
-            // Logika sederhana: Buka WA untuk validasi manual sebelum link ZIP diberikan
+            const message = encodeURIComponent(`[Nur-Engine] Admin, saya ingin akses Game Emulator ${type}. Mohon verifikasi koin saya.`);
             window.location.href = `https://wa.me/${adminWA}?text=${message}`;
         }
 
-        // Jalankan saat load
         window.onload = loadKoin;
     </script>
 </body>
