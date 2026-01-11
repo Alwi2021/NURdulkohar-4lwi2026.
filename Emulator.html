@@ -1,139 +1,92 @@
-<!DOCTYPE html>
+     <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Indramayu Club Console - Nur Engine</title>
+    <title>Indramayu Club PS1 - Real Play</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
-        body { background: #020617; color: white; font-family: 'Orbitron', sans-serif; overflow: hidden; touch-action: manipulation; }
-        .monitor-frame { background: #1e293b; border: 6px solid #334155; border-radius: 20px; box-shadow: 0 0 20px rgba(0,255,255,0.2); }
-        .hp-bar { height: 8px; background: #450a0a; border: 1px solid #991b1b; border-radius: 4px; overflow: hidden; transition: all 0.3s; }
-        .hp-fill { height: 100%; background: linear-gradient(90deg, #ef4444, #f87171); width: 100%; }
-        .hp-fill-cyan { background: linear-gradient(90deg, #06b6d4, #22d3ee); }
-        .btn-stick { width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 0 #0f172a; font-weight: bold; font-size: 18px; }
-        .btn-stick:active { transform: translateY(2px); box-shadow: none; }
+        body { background: #000; color: white; font-family: 'Orbitron', sans-serif; overflow: hidden; }
+        #game-container { width: 100%; height: 300px; background: #111; border: 4px solid #334155; position: relative; }
+        .btn-play { background: linear-gradient(to bottom, #06b6d4, #0891b2); box-shadow: 0 4px 0 #0e7490; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
-        .room-tag { font-size: 8px; padding: 2px 5px; background: #06b6d4; border-radius: 3px; color: black; font-weight: bold; }
     </style>
 </head>
 <body class="flex flex-col h-screen">
 
-    <div class="p-4 pt-6">
-        <div class="monitor-frame overflow-hidden bg-black">
-            <div class="p-2 border-b border-slate-800 text-center bg-slate-900/50">
-                <p id="game-status" class="text-[7px] text-cyan-400 tracking-[0.3em] animate-pulse uppercase">Nur Server Connected</p>
-                <h1 id="game-title" class="text-xs text-white uppercase truncate">Silahkan Pilih Level Room</h1>
+    <div class="p-2">
+        <div id="game-container" class="rounded-xl overflow-hidden shadow-2xl flex items-center justify-center">
+            <div id="display-info" class="text-center p-4">
+                <h1 class="text-cyan-400 text-xs animate-pulse">READY TO BOOT PS1 SYSTEM</h1>
+                <p class="text-[8px] text-slate-500 mt-2">PILIH KASET DI BAWAH UNTUK MEMASUKKAN DISC</p>
             </div>
-            <div class="grid grid-cols-2 gap-0 h-28 relative">
-                <div class="flex flex-col items-center justify-center p-3 border-r border-slate-800">
-                    <div class="hp-bar w-full mb-2"><div id="hp-p1" class="hp-fill hp-fill-cyan"></div></div>
-                    <div class="w-10 h-10 rounded-full border-2 border-cyan-500 bg-slate-800 mb-1 overflow-hidden">
-                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Jamhari" class="w-full h-full">
-                    </div>
-                    <p class="text-[7px] text-cyan-400 uppercase font-bold">P1: Jamhari</p>
-                </div>
-                <div class="flex flex-col items-center justify-center p-3">
-                    <div class="hp-bar w-full mb-2"><div id="hp-p2" class="hp-fill"></div></div>
-                    <div id="p2-box" class="w-10 h-10 rounded-full border-2 border-pink-500 bg-slate-800 mb-1 overflow-hidden opacity-30">
-                        <img id="p2-img" src="https://api.dicebear.com/7.x/avataaars/svg?seed=Empty" class="w-full h-full">
-                    </div>
-                    <p id="p2-name" class="text-[7px] text-pink-500 uppercase font-bold">P2: Waiting...</p>
-                </div>
-            </div>
+            <div id="emulator-area" class="hidden w-full h-full"></div>
         </div>
     </div>
 
-    <div class="px-4 flex-grow overflow-y-auto no-scrollbar">
-        <h2 class="text-[10px] text-yellow-500 mb-2 border-l-4 border-yellow-500 pl-2">LEVEL 1 TOKEN (ROOM 01-10)</h2>
-        <div class="flex overflow-x-auto gap-3 no-scrollbar mb-4">
-            <div onclick="bootSystem('SPIDERMAN', 'https://via.placeholder.com/150', 'Room 01')" class="shrink-0 w-20">
-                <img src="https://via.placeholder.com/150" class="h-24 w-full object-cover rounded border border-slate-700">
-                <p class="text-[6px] text-center mt-1">SPIDERMAN</p>
-                <center><span class="room-tag">RM-01</span></center>
-            </div>
+    <div class="px-4 flex-grow overflow-y-auto no-scrollbar py-2">
+        <h2 class="text-[10px] text-yellow-500 mb-2 font-bold">DISC COLLECTION (PS1 REAL)</h2>
+        <div class="grid grid-cols-3 gap-3">
+            
+            <div onclick="masukkanDisc('SPIDERMAN PS1', 'https://vimm.net/vault/images/covers/ps1/Spider-Man.jpg', 'https://cdn.jsdelivr.net/gh/alwi2021/ROM-DATA/spiderman.chd')" class="text-center">
+                <img src="https://www.mobygames.com/images/covers/l/51415-spider-man-2-playstation-2-front-cover.jpg" class="h-28 w-full object-cover rounded border-2 border-slate-800">
+                <p class="text-[7px] mt-1">SPIDERMAN</p>
             </div>
 
-        <h2 class="text-[10px] text-green-500 mb-2 border-l-4 border-green-500 pl-2">LEVEL 2 TOKEN (ROOM 01-10)</h2>
-        <div class="flex overflow-x-auto gap-3 no-scrollbar mb-4">
-            <div onclick="bootSystem('RUMBLE RACING', 'https://via.placeholder.com/150', 'Room 05')" class="shrink-0 w-20">
-                <img src="https://via.placeholder.com/150" class="h-24 w-full object-cover rounded border border-slate-700">
-                <p class="text-[6px] text-center mt-1">RACING</p>
-                <center><span class="room-tag">RM-05</span></center>
+            <div onclick="masukkanDisc('PEPSIMAN', 'https://images.igdb.com/igdb/image/upload/t_cover_big/co1r8p.png', 'LINK_ROM_PEPSIMAN')" class="text-center">
+                <img src="https://images.igdb.com/igdb/image/upload/t_cover_big/co1r8p.png" class="h-28 w-full object-cover rounded border-2 border-slate-800">
+                <p class="text-[7px] mt-1">PEPSIMAN</p>
             </div>
-        </div>
 
-        <h2 class="text-[10px] text-red-500 mb-2 border-l-4 border-red-500 pl-2">TURNAMEN ANTAR CLUB</h2>
-        <div class="flex overflow-x-auto gap-3 no-scrollbar mb-4">
-            <div onclick="bootSystem('PEPERANGAN KERAJAAN', 'https://via.placeholder.com/150', 'Championship')" class="shrink-0 w-20">
-                <img src="https://via.placeholder.com/150" class="h-24 w-full object-cover rounded border border-red-900">
-                <p class="text-[6px] text-center mt-1">WAR KINGDOM</p>
-                <center><span class="room-tag">FINAL</span></center>
+            <div onclick="masukkanDisc('CRASH BANDICOOT', 'https://vimm.net/vault/images/covers/ps1/Crash%20Bandicoot.jpg', 'LINK_ROM_CRASH')" class="text-center">
+                <img src="https://vimm.net/vault/images/covers/ps1/Crash%20Bandicoot.jpg" class="h-28 w-full object-cover rounded border-2 border-slate-800">
+                <p class="text-[7px] mt-1">CRASH</p>
             </div>
+
         </div>
     </div>
 
-    <div class="bg-slate-900/90 rounded-t-[2rem] border-t-2 border-slate-700 p-4">
-        <div class="flex justify-between items-center mb-4">
-             <div class="grid grid-cols-3 gap-1 opacity-50">
-                <div></div><div class="w-6 h-6 bg-slate-700 rounded-t"></div><div></div>
-                <div class="w-6 h-6 bg-slate-700 rounded-l"></div><div class="w-6 h-6 bg-slate-800"></div><div class="w-6 h-6 bg-slate-700 rounded-r"></div>
-             </div>
-             <div class="grid grid-cols-2 gap-2">
-                <div onclick="attack('△')" class="btn-stick bg-slate-800 border-t border-green-500 text-green-500 text-xs">△</div>
-                <div onclick="attack('○')" class="btn-stick bg-slate-800 border-r border-red-500 text-red-500 text-xs">○</div>
-             </div>
-        </div>
-        <button onclick="kirimKeNur()" class="w-full py-3 bg-cyan-600 rounded-xl font-bold text-[9px] tracking-widest shadow-lg active:scale-95">
-            AKTIVASI & CATAT KE CELENGAN NUR
+    <div class="p-4 bg-slate-900 border-t-2 border-slate-800">
+        <button id="btn-power" onclick="startEmu()" class="w-full py-4 btn-play rounded-2xl font-bold text-xs tracking-widest active:scale-95 transition-all">
+            POWER ON / START GAME
         </button>
     </div>
 
     <script>
-        // --- JABAT TANGAN RUH BARU ---
-        const URL_RUH = "https://script.google.com/macros/s/AKfycbwBi5rv3pd8tANS63Ig3VZF34FSvt1Br_jx79kl66xpr8tzaTtAlFh-Nnrthk3lTWtM/exec";
-        let roomAktif = "";
+        let gameUrl = "";
+        let gameTitle = "";
 
-        function vibe(ms) { if (navigator.vibrate) navigator.vibrate(ms); }
-
-        function bootSystem(game, img, room) {
-            vibe(100);
-            roomAktif = room;
-            document.getElementById('game-title').innerText = "LOADING " + room + "...";
-            setTimeout(() => {
-                document.getElementById('game-title').innerText = game;
-                document.getElementById('p2-name').innerText = room;
-                document.getElementById('p2-box').style.opacity = "1";
-                document.getElementById('game-status').innerText = "SYSTEM READY";
-            }, 1000);
+        function masukkanDisc(title, img, url) {
+            gameUrl = url;
+            gameTitle = title;
+            document.getElementById('display-info').innerHTML = `
+                <img src="${img}" class="h-20 mx-auto mb-2 rounded shadow-lg border border-cyan-500">
+                <p class="text-cyan-400 text-[10px]">DISC DETECTED: ${title}</p>
+                <p class="text-[8px] text-white">KLIK POWER UNTUK LOADING</p>
+            `;
+            if (navigator.vibrate) navigator.vibrate([50, 30, 50]);
         }
 
-        function attack(btn) {
-            vibe(40);
-            let hpP2 = document.getElementById('hp-p2');
-            let currentWidth = parseInt(hpP2.style.width || 100);
-            if(currentWidth > 0) hpP2.style.width = (currentWidth - 10) + "%";
-        }
+        function startEmu() {
+            if(!gameUrl) { alert("Masukkan Disc Dulu, Pak!"); return; }
+            
+            // Catat Aktivitas ke Nur (Celengan Tersembunyi)
+            const URL_RUH = "https://script.google.com/macros/s/AKfycbwBi5rv3pd8tANS63Ig3VZF34FSvt1Br_jx79kl66xpr8tzaTtAlFh-Nnrthk3lTWtM/exec";
+            fetch(`${URL_RUH}?action=mainGame&id=JAMHARI&game=${encodeURIComponent(gameTitle)}`, {mode: 'no-cors'});
 
-        function kirimKeNur() {
-            const game = document.getElementById('game-title').innerText;
-            if(game.includes("PILIH")) { alert("Pilih Kaset dan Room!"); return; }
+            // Memanggil Mesin Emulator
+            document.getElementById('display-info').classList.add('hidden');
+            const emuArea = document.getElementById('emulator-area');
+            emuArea.classList.remove('hidden');
             
-            // Bypass data ke Google Script
-            const finalUrl = `${URL_RUH}?action=mainGame&id=JAMHARI&game=${encodeURIComponent(game)}&room=${roomAktif}`;
+            // Script ini akan memanggil EmulatorJS secara eksternal
+            emuArea.innerHTML = `<iframe src="https://www.emulatorjs.com/v2/player.html?game=${gameUrl}&system=ps1" width="100%" height="100%" frameborder="0" scrolling="no" allowfullscreen></iframe>`;
             
-            document.getElementById('game-status').innerText = "SENDING TO NUR...";
-            
-            fetch(finalUrl, { mode: 'no-cors' })
-            .then(() => {
-                alert("Data Terkirim! Nur telah mencatat di Celengan Tersembunyi.");
-                window.location.href = `https://wa.me/6281386517352?text=Nur, Aktifkan ${game} di ${roomAktif}`;
-            })
-            .catch(e => alert("Cek Koneksi Internet!"));
+            document.getElementById('btn-power').innerText = "SYSTEM RUNNING...";
+            document.getElementById('btn-power').classList.replace('btn-play', 'bg-red-600');
         }
     </script>
 </body>
 </html>
- 
-
+                   
