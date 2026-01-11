@@ -1,48 +1,148 @@
-    <div class="max-w-md mx-auto space-y-6">
-        
-        <div class="emulator-card relative bg-slate-900 rounded-3xl p-6 overflow-hidden neon-glow group">
-            <div class="relative z-10">
-                <div class="flex justify-between items-start mb-6">
-                    <h2 class="font-game text-lg text-white">PS2-CORE</h2>
-                    <span class="text-[9px] bg-cyan-500 text-black px-2 py-0.5 rounded font-bold uppercase">Ready</span>
-                </div>
-                
-                <div class="grid grid-cols-2 gap-2 mb-6 text-[10px] text-slate-400 uppercase">
-                    <div class="bg-black/40 p-2 rounded-lg border border-white/5 tracking-tighter text-center">Naruto Ship. 5</div>
-                    <div class="bg-black/40 p-2 rounded-lg border border-white/5 tracking-tighter text-center">Basara 2 Hero</div>
-                    <div class="bg-black/40 p-2 rounded-lg border border-white/5 tracking-tighter text-center">GTA San Andreas</div>
-                    <div class="bg-black/40 p-2 rounded-lg border border-white/5 tracking-tighter text-center">Tekken 5</div>
-                </div>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nur Emulator - Indramayu Club</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+        body { background: #020617; color: white; font-family: sans-serif; overflow-x: hidden; }
+        .font-nur { font-family: 'Orbitron', sans-serif; }
 
-                <button onclick="requestGame('PS2')" class="w-full bg-cyan-600 hover:bg-cyan-400 text-black font-game text-xs py-4 rounded-2xl transition-all shadow-lg active:scale-95 uppercase">
-                    Mulai Main / Sewa
-                </button>
+        /* MONITOR TV STYLE */
+        .monitor-screen {
+            background: #000;
+            border: 10px solid #1e293b;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(34, 211, 238, 0.2);
+            aspect-ratio: 16 / 9;
+        }
+        .scanline {
+            width: 100%; height: 100%;
+            background: linear-gradient(to bottom, rgba(18, 16, 16, 0) 0%, rgba(18, 16, 16, 0.5) 50%, rgba(18, 16, 16, 0) 100%);
+            background-size: 100% 8px;
+            position: absolute; animation: scan 8s linear infinite;
+            pointer-events: none; opacity: 0.2;
+        }
+        @keyframes scan { from { transform: translateY(-100%); } to { transform: translateY(100%); } }
+
+        /* GLASS PANEL */
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(10px);
+            border-top: 2px solid rgba(34, 211, 238, 0.3);
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+
+    <div class="p-4 w-full max-w-lg mx-auto mt-4">
+        <div class="monitor-screen">
+            <div class="scanline"></div>
+            <div id="screen-display" class="h-full flex flex-col items-center justify-center text-center p-4">
+                <p class="font-nur text-[8px] text-cyan-500 animate-pulse tracking-[0.4em] mb-2">NUR ENGINE ACTIVE</p>
+                <h2 id="current-game" class="font-nur text-xl text-white uppercase tracking-tighter">NO DISC LOADED</h2>
+                <p id="boot-status" class="text-[10px] text-slate-500 mt-2 italic">Please select a game...</p>
+            </div>
+            <div class="absolute bottom-2 right-4 flex gap-2">
+                <div id="led-red" class="w-1.5 h-1.5 rounded-full bg-red-600 shadow-[0_0_5px_red]"></div>
+                <div id="led-green" class="w-1.5 h-1.5 rounded-full bg-green-900"></div>
             </div>
         </div>
+    </div>
 
-        <div class="p-4 bg-cyan-950/20 rounded-2xl border border-cyan-900/30 text-center">
-            <p class="text-[10px] text-slate-400 mb-1">TOP UP KOIN VIA ADMIN</p>
-            <p class="font-game text-cyan-500 text-sm">081386517352</p>
+    <div class="glass-panel flex-grow mt-4 p-6 rounded-t-[3rem] shadow-2xl">
+        <div class="max-w-xl mx-auto">
+            <div class="flex justify-between items-center mb-6 px-2">
+                <div>
+                    <p class="text-[9px] text-slate-400 uppercase tracking-widest">Administrator</p>
+                    <p class="font-nur text-xs text-cyan-400">JAMHARI SYSTEM</p>
+                </div>
+                <button onclick="window.location.href='index.html'" class="p-2 bg-slate-800 rounded-full border border-white/10">
+                    <svg class="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                </button>
+            </div>
+
+            <h3 class="font-nur text-[9px] text-slate-500 mb-6 tracking-[0.2em] text-center uppercase">Game Library (Slide to Browse)</h3>
+            
+            <div class="flex overflow-x-auto gap-6 pb-8 snap-x no-scrollbar">
+                
+                <div onclick="bootGame('NARUTO ACCEL 2', 'PS2 SYSTEM')" class="snap-center shrink-0 w-44 group">
+                    <div class="relative bg-slate-800 p-2 rounded-lg shadow-2xl border-l-8 border-black transform group-hover:-rotate-3 group-hover:scale-105 transition-all duration-300">
+                        <img src="1000023082.jpg" class="w-full h-56 object-cover rounded shadow-inner" alt="Naruto">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                    </div>
+                    <p class="text-[10px] font-nur text-center mt-4 text-slate-300 group-hover:text-cyan-400">NARUTO ACCEL 2</p>
+                </div>
+
+                <div onclick="bootGame('MARVEL VS CAPCOM', 'ARCADE SYSTEM')" class="snap-center shrink-0 w-44 group">
+                    <div class="relative bg-slate-800 p-2 rounded-lg shadow-2xl border-l-8 border-black transform group-hover:-rotate-3 group-hover:scale-105 transition-all duration-300">
+                        <img src="1000023088jpg).jpg" class="w-full h-56 object-cover rounded shadow-inner" alt="Marvel">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                    </div>
+                    <p class="text-[10px] font-nur text-center mt-4 text-slate-300 group-hover:text-cyan-400 text-uppercase">MARVEL INFINITE</p>
+                </div>
+
+                <div onclick="bootGame('ULTIMATE MARVEL', 'CAPCOM SYSTEM')" class="snap-center shrink-0 w-44 group">
+                    <div class="relative bg-slate-800 p-2 rounded-lg shadow-2xl border-l-8 border-black transform group-hover:-rotate-3 group-hover:scale-105 transition-all duration-300">
+                        <img src="1000023084.jpg" class="w-full h-56 object-cover rounded shadow-inner" alt="Ultimate Marvel">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                    </div>
+                    <p class="text-[10px] font-nur text-center mt-4 text-slate-300 group-hover:text-cyan-400">ULTIMATE MARVEL 3</p>
+                </div>
+
+            </div>
+
+            <button onclick="sewaGame()" class="w-full mt-4 py-4 bg-gradient-to-r from-cyan-600 to-blue-700 rounded-2xl font-nur text-[10px] tracking-widest shadow-[0_10px_20px_rgba(8,145,178,0.3)] active:scale-95 transition-all">
+                KONFIRMASI SEWA KASET
+            </button>
         </div>
-
     </div>
 
     <script>
-        // Simulasi Konek ke Google Script Koin
-        async function loadKoin() {
-            // Nanti masukkan URL Google Script Anda di sini
+        function bootGame(name, sys) {
+            // SENSOR GETAR STICK
+            if (navigator.vibrate) {
+                navigator.vibrate(60); 
+            }
+
+            // UPDATE MONITOR
+            const title = document.getElementById('current-game');
+            const status = document.getElementById('boot-status');
+            const ledGreen = document.getElementById('led-green');
+            
+            title.innerText = "LOADING...";
+            status.innerText = "Reading " + sys + "...";
+            title.classList.add('animate-pulse');
+            ledGreen.classList.add('animate-ping', 'bg-green-500');
+
             setTimeout(() => {
-                document.getElementById('display-koin').innerText = "150.00"; 
-            }, 1000);
+                title.classList.remove('animate-pulse');
+                title.innerText = name;
+                status.innerText = "System Ready. Disc Recognized.";
+                ledGreen.classList.remove('animate-ping');
+                ledGreen.classList.replace('bg-green-900', 'bg-green-500');
+                ledGreen.style.boxShadow = "0 0 10px #22c55e";
+                
+                // Getar konfirmasi boot sukses
+                if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
+            }, 2000);
         }
 
-        function requestGame(type) {
-            const adminWA = "6281386517352";
-            const message = encodeURIComponent(`[Nur-Engine] Admin, saya ingin akses Game Emulator ${type}. Mohon verifikasi koin saya.`);
-            window.location.href = `https://wa.me/${adminWA}?text=${message}`;
+        function sewaGame() {
+            const game = document.getElementById('current-game').innerText;
+            if (game === "NO DISC LOADED" || game === "LOADING...") {
+                alert("Silakan pilih kaset terlebih dahulu!");
+                return;
+            }
+            const wa = "6281386517352";
+            const msg = encodeURIComponent(`[Sewa-Kaset] Admin Jamhari, saya ingin menyewa kaset: ${game}. Mohon aktifkan aksesnya.`);
+            window.location.href = `https://wa.me/${wa}?text=${msg}`;
         }
-
-        window.onload = loadKoin;
     </script>
 </body>
 </html>
