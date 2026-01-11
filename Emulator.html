@@ -1,43 +1,21 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Indramayu Club Console</title>
+    <title>Indramayu Club Console - Nur Engine</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
         body { background: #020617; color: white; font-family: 'Orbitron', sans-serif; overflow: hidden; touch-action: manipulation; }
-        
-        .monitor-frame {
-            background: #1e293b;
-            border: 6px solid #334155;
-            border-radius: 20px;
-            box-shadow: 0 0 20px rgba(0,255,255,0.2);
-        }
-
-        .hp-bar {
-            height: 8px;
-            background: #450a0a;
-            border: 1px solid #991b1b;
-            border-radius: 4px;
-            overflow: hidden;
-            transition: all 0.3s;
-        }
+        .monitor-frame { background: #1e293b; border: 6px solid #334155; border-radius: 20px; box-shadow: 0 0 20px rgba(0,255,255,0.2); }
+        .hp-bar { height: 8px; background: #450a0a; border: 1px solid #991b1b; border-radius: 4px; overflow: hidden; transition: all 0.3s; }
         .hp-fill { height: 100%; background: linear-gradient(90deg, #ef4444, #f87171); width: 100%; }
         .hp-fill-cyan { background: linear-gradient(90deg, #06b6d4, #22d3ee); }
-
-        .btn-stick {
-            width: 55px; height: 55px;
-            border-radius: 50%;
-            display: flex; items-center; justify-center;
-            box-shadow: 0 4px 0 #0f172a;
-            font-weight: bold; font-size: 18px;
-            active:translate-y-1 active:shadow-none;
-        }
-
+        .btn-stick { width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 0 #0f172a; font-weight: bold; font-size: 18px; }
+        .btn-stick:active { transform: translateY(2px); box-shadow: none; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
-        .active-kaset { border-color: #22d3ee !important; transform: scale(1.05); }
+        .room-tag { font-size: 8px; padding: 2px 5px; background: #06b6d4; border-radius: 3px; color: black; font-weight: bold; }
     </style>
 </head>
 <body class="flex flex-col h-screen">
@@ -45,122 +23,117 @@
     <div class="p-4 pt-6">
         <div class="monitor-frame overflow-hidden bg-black">
             <div class="p-2 border-b border-slate-800 text-center bg-slate-900/50">
-                <p id="game-status" class="text-[7px] text-cyan-400 tracking-[0.3em] animate-pulse uppercase">Nur Engine V.2</p>
-                <h1 id="game-title" class="text-xs text-white uppercase truncate">Insert Disc to Start</h1>
+                <p id="game-status" class="text-[7px] text-cyan-400 tracking-[0.3em] animate-pulse uppercase">Nur Server Connected</p>
+                <h1 id="game-title" class="text-xs text-white uppercase truncate">Silahkan Pilih Level Room</h1>
             </div>
-
-            <div class="grid grid-cols-2 gap-0 h-32 relative">
+            <div class="grid grid-cols-2 gap-0 h-28 relative">
                 <div class="flex flex-col items-center justify-center p-3 border-r border-slate-800">
                     <div class="hp-bar w-full mb-2"><div id="hp-p1" class="hp-fill hp-fill-cyan"></div></div>
-                    <div class="w-12 h-12 rounded-full border-2 border-cyan-500 bg-slate-800 mb-1 overflow-hidden">
+                    <div class="w-10 h-10 rounded-full border-2 border-cyan-500 bg-slate-800 mb-1 overflow-hidden">
                         <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Jamhari" class="w-full h-full">
                     </div>
-                    <p class="text-[8px] text-cyan-400 uppercase font-bold">P1: Jamhari</p>
+                    <p class="text-[7px] text-cyan-400 uppercase font-bold">P1: Jamhari</p>
                 </div>
-
                 <div class="flex flex-col items-center justify-center p-3">
                     <div class="hp-bar w-full mb-2"><div id="hp-p2" class="hp-fill"></div></div>
-                    <div class="w-12 h-12 rounded-full border-2 border-pink-500 bg-slate-800 mb-1 overflow-hidden">
-                        <img id="p2-img" src="https://api.dicebear.com/7.x/avataaars/svg?seed=Empty" class="w-full h-full opacity-30">
+                    <div id="p2-box" class="w-10 h-10 rounded-full border-2 border-pink-500 bg-slate-800 mb-1 overflow-hidden opacity-30">
+                        <img id="p2-img" src="https://api.dicebear.com/7.x/avataaars/svg?seed=Empty" class="w-full h-full">
                     </div>
-                    <p id="p2-name" class="text-[8px] text-pink-500 uppercase font-bold">P2: Waiting...</p>
-                </div>
-                
-                <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-                    <span class="bg-black px-2 py-1 border border-slate-700 text-[10px] italic font-bold text-yellow-500">VS</span>
+                    <p id="p2-name" class="text-[7px] text-pink-500 uppercase font-bold">P2: Waiting...</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="px-4">
-        <div class="flex overflow-x-auto gap-4 no-scrollbar py-2">
-            <div onclick="bootSystem('NARUTO ACCEL 2', '1000023082.jpg', 'Dulkohar')" class="shrink-0 w-24 group">
-                <img id="kaset-1" src="1000023082.jpg" class="h-32 w-full object-cover rounded border-2 border-slate-800 transition-all">
-                <p class="text-[7px] text-center mt-1 text-slate-500">NARUTO</p>
+    <div class="px-4 flex-grow overflow-y-auto no-scrollbar">
+        <h2 class="text-[10px] text-yellow-500 mb-2 border-l-4 border-yellow-500 pl-2">LEVEL 1 TOKEN (ROOM 01-10)</h2>
+        <div class="flex overflow-x-auto gap-3 no-scrollbar mb-4">
+            <div onclick="bootSystem('SPIDERMAN', 'https://via.placeholder.com/150', 'Room 01')" class="shrink-0 w-20">
+                <img src="https://via.placeholder.com/150" class="h-24 w-full object-cover rounded border border-slate-700">
+                <p class="text-[6px] text-center mt-1">SPIDERMAN</p>
+                <center><span class="room-tag">RM-01</span></center>
             </div>
-            <div onclick="bootSystem('MARVEL INFINITE', '1000023088jpg).jpg', 'Nurdin')" class="shrink-0 w-24 group">
-                <img id="kaset-2" src="1000023088jpg).jpg" class="h-32 w-full object-cover rounded border-2 border-slate-800 transition-all">
-                <p class="text-[7px] text-center mt-1 text-slate-500">MARVEL</p>
             </div>
-            <div onclick="bootSystem('ULTIMATE MARVEL 3', '1000023084.jpg', 'Member')" class="shrink-0 w-24 group">
-                <img id="kaset-3" src="1000023084.jpg" class="h-32 w-full object-cover rounded border-2 border-slate-800 transition-all">
-                <p class="text-[7px] text-center mt-1 text-slate-500">MARVEL 3</p>
+
+        <h2 class="text-[10px] text-green-500 mb-2 border-l-4 border-green-500 pl-2">LEVEL 2 TOKEN (ROOM 01-10)</h2>
+        <div class="flex overflow-x-auto gap-3 no-scrollbar mb-4">
+            <div onclick="bootSystem('RUMBLE RACING', 'https://via.placeholder.com/150', 'Room 05')" class="shrink-0 w-20">
+                <img src="https://via.placeholder.com/150" class="h-24 w-full object-cover rounded border border-slate-700">
+                <p class="text-[6px] text-center mt-1">RACING</p>
+                <center><span class="room-tag">RM-05</span></center>
+            </div>
+        </div>
+
+        <h2 class="text-[10px] text-red-500 mb-2 border-l-4 border-red-500 pl-2">TURNAMEN ANTAR CLUB</h2>
+        <div class="flex overflow-x-auto gap-3 no-scrollbar mb-4">
+            <div onclick="bootSystem('PEPERANGAN KERAJAAN', 'https://via.placeholder.com/150', 'Championship')" class="shrink-0 w-20">
+                <img src="https://via.placeholder.com/150" class="h-24 w-full object-cover rounded border border-red-900">
+                <p class="text-[6px] text-center mt-1">WAR KINGDOM</p>
+                <center><span class="room-tag">FINAL</span></center>
             </div>
         </div>
     </div>
 
-    <div class="flex-grow flex flex-col justify-end bg-slate-900/80 rounded-t-[3rem] border-t-4 border-slate-800 p-6">
+    <div class="bg-slate-900/90 rounded-t-[2rem] border-t-2 border-slate-700 p-4">
         <div class="flex justify-between items-center mb-4">
-             <div class="grid grid-cols-3 gap-1">
-                <div></div><div onclick="vibe(40)" class="w-8 h-8 bg-slate-700 rounded-t"></div><div></div>
-                <div onclick="vibe(40)" class="w-8 h-8 bg-slate-700 rounded-l"></div>
-                <div class="w-8 h-8 bg-slate-800"></div>
-                <div onclick="vibe(40)" class="w-8 h-8 bg-slate-700 rounded-r"></div>
-                <div></div><div onclick="vibe(40)" class="w-8 h-8 bg-slate-700 rounded-b"></div><div></div>
+             <div class="grid grid-cols-3 gap-1 opacity-50">
+                <div></div><div class="w-6 h-6 bg-slate-700 rounded-t"></div><div></div>
+                <div class="w-6 h-6 bg-slate-700 rounded-l"></div><div class="w-6 h-6 bg-slate-800"></div><div class="w-6 h-6 bg-slate-700 rounded-r"></div>
              </div>
-             <div class="grid grid-cols-2 gap-3">
-                <div onclick="attack('△')" class="btn-stick bg-slate-800 border-t-2 border-green-500 text-green-500">△</div>
-                <div onclick="attack('○')" class="btn-stick bg-slate-800 border-r-2 border-red-500 text-red-500">○</div>
-                <div onclick="attack('□')" class="btn-stick bg-slate-800 border-l-2 border-pink-500 text-pink-500">□</div>
-                <div onclick="attack('✕')" class="btn-stick bg-slate-800 border-b-2 border-blue-500 text-blue-500">✕</div>
+             <div class="grid grid-cols-2 gap-2">
+                <div onclick="attack('△')" class="btn-stick bg-slate-800 border-t border-green-500 text-green-500 text-xs">△</div>
+                <div onclick="attack('○')" class="btn-stick bg-slate-800 border-r border-red-500 text-red-500 text-xs">○</div>
              </div>
         </div>
-        
-        <button onclick="sewaSekarang()" class="w-full py-4 bg-cyan-600 rounded-2xl font-bold text-[10px] tracking-widest shadow-lg active:scale-95 transition-all">
-            KONFIRMASI AKTIVASI VS MODE
+        <button onclick="kirimKeNur()" class="w-full py-3 bg-cyan-600 rounded-xl font-bold text-[9px] tracking-widest shadow-lg active:scale-95">
+            AKTIVASI & CATAT KE CELENGAN NUR
         </button>
     </div>
 
     <script>
-        let currentEnemy = "";
+        // --- JABAT TANGAN RUH BARU ---
+        const URL_RUH = "https://script.google.com/macros/s/AKfycbwBi5rv3pd8tANS63Ig3VZF34FSvt1Br_jx79kl66xpr8tzaTtAlFh-Nnrthk3lTWtM/exec";
+        let roomAktif = "";
 
         function vibe(ms) { if (navigator.vibrate) navigator.vibrate(ms); }
 
-        function bootSystem(game, img, member) {
-            vibe([60, 40, 60]);
-            currentEnemy = member;
-            document.getElementById('game-title').innerText = "LOADING...";
-            document.getElementById('p2-name').innerText = "CONNECTING...";
-            
+        function bootSystem(game, img, room) {
+            vibe(100);
+            roomAktif = room;
+            document.getElementById('game-title').innerText = "LOADING " + room + "...";
             setTimeout(() => {
                 document.getElementById('game-title').innerText = game;
-                document.getElementById('p2-name').innerText = "P2: " + member;
-                document.getElementById('p2-img').src = "https://api.dicebear.com/7.x/avataaars/svg?seed=" + member;
-                document.getElementById('p2-img').style.opacity = "1";
-                document.getElementById('game-status').innerText = "Battle Ready";
-                vibe(150);
-            }, 1500);
+                document.getElementById('p2-name').innerText = room;
+                document.getElementById('p2-box').style.opacity = "1";
+                document.getElementById('game-status').innerText = "SYSTEM READY";
+            }, 1000);
         }
 
         function attack(btn) {
-            vibe(50);
-            const title = document.getElementById('game-title').innerText;
-            if(title === "INSERT DISC TO START" || title === "LOADING...") return;
-
-            // Efek Kurangi Darah Lawan (P2)
+            vibe(40);
             let hpP2 = document.getElementById('hp-p2');
             let currentWidth = parseInt(hpP2.style.width || 100);
-            if(currentWidth > 0) {
-                hpP2.style.width = (currentWidth - 10) + "%";
-                document.getElementById('game-status').innerText = "P1 ATTACK WITH " + btn;
-                setTimeout(() => { document.getElementById('game-status').innerText = "Battle Ready"; }, 500);
-            } else {
-                alert("P2 K.O! Admin Jamhari Menang!");
-                hpP2.style.width = "100%";
-            }
+            if(currentWidth > 0) hpP2.style.width = (currentWidth - 10) + "%";
         }
 
-        function sewaSekarang() {
+        function kirimKeNur() {
             const game = document.getElementById('game-title').innerText;
-            if(game.includes("INSERT")) { alert("Pilih kaset dulu!"); return; }
-            const msg = `[VS-MODE] Admin Jamhari, saya ingin menyewa kaset ${game} untuk mabar dengan ${currentEnemy}. Mohon aktivasi.`;
-            window.location.href = `https://wa.me/6281386517352?text=${encodeURIComponent(msg)}`;
+            if(game.includes("PILIH")) { alert("Pilih Kaset dan Room!"); return; }
+            
+            // Bypass data ke Google Script
+            const finalUrl = `${URL_RUH}?action=mainGame&id=JAMHARI&game=${encodeURIComponent(game)}&room=${roomAktif}`;
+            
+            document.getElementById('game-status').innerText = "SENDING TO NUR...";
+            
+            fetch(finalUrl, { mode: 'no-cors' })
+            .then(() => {
+                alert("Data Terkirim! Nur telah mencatat di Celengan Tersembunyi.");
+                window.location.href = `https://wa.me/6281386517352?text=Nur, Aktifkan ${game} di ${roomAktif}`;
+            })
+            .catch(e => alert("Cek Koneksi Internet!"));
         }
     </script>
 </body>
 </html>
-
-            
-
+ 
 
