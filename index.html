@@ -1,0 +1,392 @@
+DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>PIRAMIDA GUARD - INDRAMAYU CLUB</title>
+<style>
+  body {
+    background-color: #0d0d0d;
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+    padding: 20px;
+    font-size: 12px;
+    margin: 0;
+  }
+  .container {
+    border: 2px solid white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px white;
+    max-width: 900px;
+    margin: auto;
+  }
+  h1 {
+    text-align: center;
+    color: #1e90ff;
+    text-shadow: 1px 1px #0d0d0d;
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  p.center {
+    text-align: center;
+    margin: 5px 0 20px 0;
+    font-size: 13px;
+  }
+  /* Toggle Button */
+  #toggleTreeBtn {
+    background: #1e90ff;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    font-size: 12px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    display: block;
+    width: 180px;
+  }
+  /* Tree List */
+  .tree-list {
+    border-left: 2px dashed white;
+    padding-left: 15px;
+    margin-bottom: 25px;
+  }
+  details > summary {
+    color: #1e90ff;
+    font-weight: bold;
+    margin: 7px 0;
+    cursor: pointer;
+    font-size: 12px;
+    user-select: none;
+    outline: none;
+  }
+  details[open] > summary {
+    color: #63b3ed;
+  }
+  .content {
+    color: white;
+    margin-left: 15px;
+    font-size: 12px;
+    line-height: 1.3;
+  }
+  .file-link {
+    color: #1e90ff;
+    display: inline-block;
+    margin: 3px 10px 3px 0;
+    font-size: 12px;
+    text-decoration: none;
+  }
+  .file-link:hover {
+    text-decoration: underline;
+  }
+
+  /* Gallery Scroll Container */
+  .gallery-container {
+    overflow-x: auto;
+    white-space: nowrap;
+    padding-bottom: 10px;
+    margin-bottom: 25px;
+    border-bottom: 1px solid white;
+  }
+  .gallery-item {
+    display: inline-block;
+    margin-right: 12px;
+    vertical-align: top;
+  }
+  .gallery-item img, .gallery-item video, .gallery-item audio {
+    max-height: 120px;
+    border: 2px solid #1e90ff;
+    border-radius: 8px;
+    display: block;
+  }
+  .gallery-item video, .gallery-item audio {
+    max-width: 180px;
+  }
+  .gallery-caption {
+    color: #1e90ff;
+    font-size: 11px;
+    text-align: center;
+    margin-top: 3px;
+    width: 180px;
+  }
+
+  /* Komentar Section */
+  #commentsSection {
+    margin-top: 30px;
+    color: white;
+    font-size: 12px;
+  }
+  #commentForm {
+    margin-bottom: 15px;
+  }
+  #commentForm label {
+    display: block;
+    margin: 8px 0 3px 0;
+  }
+  #commentForm input[type="text"],
+  #commentForm textarea {
+    width: 100%;
+    padding: 7px;
+    border-radius: 5px;
+    border: 1px solid #1e90ff;
+    background-color: #222;
+    color: white;
+    resize: vertical;
+    font-family: monospace;
+    font-size: 12px;
+  }
+  #commentForm button {
+    background: #1e90ff;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    margin-top: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 12px;
+  }
+  #commentsList {
+    max-height: 180px;
+    overflow-y: auto;
+    border: 1px solid #1e90ff;
+    border-radius: 5px;
+    padding: 10px;
+    background: #121212;
+  }
+  .comment-item {
+    border-bottom: 1px solid #1e90ff;
+    padding: 5px 0;
+  }
+  .comment-item:last-child {
+    border-bottom: none;
+  }
+  /* Rating stars */
+  #ratingStars {
+    margin-top: 5px;
+  }
+  #ratingStars span {
+    font-size: 18px;
+    color: #444;
+    cursor: pointer;
+  }
+  #ratingStars span.selected,
+  #ratingStars span:hover,
+  #ratingStars span:hover ~ span {
+    color: #1e90ff;
+  }
+
+  /* Status-bar marquee */
+  .status-bar {
+    margin-top: 30px;
+    padding: 10px;
+    background: #222;
+    border-radius: 5px;
+    font-size: 11px;
+    color: white;
+    display: flex;
+  }
+  .marquee {
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+  .marquee span {
+    display: inline-block;
+    padding-left: 100%;
+    animation: marquee 20s linear infinite;
+  }
+  @keyframes marquee {
+    from { transform: translateX(0%); }
+    to { transform: translateX(-100%); }
+  }
+
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <h1>🌳 TREE GUARD SYSTEM 🌳</h1>
+    <p class="center">Pusat: <b>dkohar011@gmail.com</b></p>
+
+    <!-- Gallery photo/video/music horizontal scroll -->
+    <div class="gallery-container" title="Gallery Photo, Video & Musik">
+        <div class="gallery-item" title="Foto Indramayu Club">
+            <img src="https://i.imgur.com/3eZ2OrX.jpg" alt="Foto Indramayu Club" />
+            <div class="gallery-caption">Indramayu Club</div>
+        </div>
+        <div class="gallery-item" title="Video Penjelasan">
+            <video src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm" controls></video>
+            <div class="gallery-caption">Video Makrifat</div>
+        </div>
+        <div class="gallery-item" title="Musik Pengiring">
+            <audio controls preload="none" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
+            <div class="gallery-caption">Musik Game Arisan</div>
+        </div>
+    </div>
+
+    <button id="toggleTreeBtn" aria-expanded="true">Sembunyikan Tree Guard</button>
+
+    <div id="treeList" class="tree-list" role="region" aria-label="Daftar Tree Guard">
+        <details open>
+            <summary>📂 01-09 PIRAMIDA GUARD (Akun Inti)</summary>
+            <div class="content">
+                • Nur 1: Rumah Nur (indramayuclubmakrifat)<br>
+                • Nur 2: Pusat Diskusi (dkohar011)<br>
+                • Nur 3: Keuangan (Bunda Imahazzah)<br>
+                • Nur 7: Komunikasi (Penyapa Spiritual)<br>
+                • Nur 8: Backup (Reset Adzan)
+            </div>
+        </details>
+
+        <details>
+            <summary>📂 GUDANG GAME & TOOLS</summary>
+            <div class="content">
+                <a href="https://drive.google.com/drive/folders/19sQU6y-_PD2Nj9-wRdsICh7LUyxtspia" target="_blank" rel="noopener" class="file-link">📄 Game Arisan</a>
+                <a href="https://drive.google.com/drive/folders/1AY5jD0BbOZMcUW2JTq5HpbNlZQ1l3P3n" target="_blank" rel="noopener" class="file-link">📄 Game Indramayu</a>
+                <a href="https://drive.google.com/drive/folders/1-vfSMe4HLBRw_6xgHQuzL2MaL-QsmYyT" target="_blank" rel="noopener" class="file-link">📄 Tools Piramida</a>
+            </div>
+        </details>
+
+        <details>
+            <summary>📂 LIBRARY AI PYTHON & PIP</summary>
+            <div class="content">
+                • Python 3.x Installed<br>
+                • Pip Package Manager<br>
+                • AI Mubin (Logic Core)<br>
+                • AI Kesatria (Security)
+            </div>
+        </details>
+
+        <details>
+            <summary>📂 DATA MEMBER & LENCANA</summary>
+            <div class="content">
+                <a href="https://drive.google.com/drive/folders/1v0Wc-oNUhJYHBIj9sP6KcmOXwNpHkzm_" target="_blank" rel="noopener" class="file-link">📄 Member Lelaki</a>
+                <a href="https://drive.google.com/drive/folders/19ezgJgH4kn7KV23NMaLsUnJVHl8PMJT_" target="_blank" rel="noopener" class="file-link">📄 Member Perempuan</a>
+                <a href="https://drive.google.com/drive/folders/1w4NdVPZVDbdptFT_n3mtL0zxPQ_Uveuz" target="_blank" rel="noopener" class="file-link">📄 Lencana Otomatis</a>
+            </div>
+        </details>
+    </div>
+
+    <!-- Komentar dan rating -->
+    <section id="commentsSection" aria-label="Komentar dan Rating">
+      <h2 style="color:#1e90ff; font-size:14px;">💬 Komentar & Rating</h2>
+      <form id="commentForm" aria-describedby="commentInstructions">
+        <label for="nameField">Nama:</label>
+        <input type="text" id="nameField" name="name" maxlength="30" required />
+        <label for="commentField">Komentar:</label>
+        <textarea id="commentField" name="comment" rows="3" maxlength="250" required></textarea>
+        <label>Rating:</label>
+        <div id="ratingStars" role="radiogroup" aria-label="Rating bintang">
+          <span tabindex="0" data-value="1" role="radio" aria-checked="false" title="1 Bintang">&#9733;</span>
+          <span tabindex="0" data-value="2" role="radio" aria-checked="false" title="2 Bintang">&#9733;</span>
+          <span tabindex="0" data-value="3" role="radio" aria-checked="false" title="3 Bintang">&#9733;</span>
+          <span tabindex="0" data-value="4" role="radio" aria-checked="false" title="4 Bintang">&#9733;</span>
+          <span tabindex="0" data-value="5" role="radio" aria-checked="false" title="5 Bintang">&#9733;</span>
+        </div>
+        <button type="submit">Kirim</button>
+      </form>
+      <div id="commentsList" aria-live="polite" aria-label="Daftar komentar"></div>
+    </section>
+
+    <!-- Status bar with moving text -->
+    <div class="status-bar" aria-live="polite" aria-atomic="true">
+      <div class="marquee">
+        <span id="marqueeText">
+          Sekarang waktu-nya istirahat — Tugas Para Nur – indramayuclubmakrifat@gmail.com | 
+          INDRAMAYU_CLUB — 
+          https://drive.google.com/drive/folders/1-vfSMe4HLBRw_6xgHQuzL2MaL-QsmYyT | 
+          dkohar011@gmail.com DISKUSI — 
+          https://drive.google.com/drive/folders/19ezgJgH4kn7KV23NMaLsUnJVHl8PMJT_ | 
+          imahazzah51@gmail.com ADMINISTRASI — 
+          https://drive.google.com/drive/folders/1v0Wc-oNUhJYHBIj9sP6KcmOXwNpHkzm_ | 
+          kurnadibewok3311@gmail.com KREATOR_DIGITAL — 
+          https://drive.google.com/drive/folders/1w4NdVPZVDbdptFT_n3mtL0zxPQ_Uveuz | 
+          motherainur8@gmail.com GAME_ARISAN — 
+          https://drive.google.com/drive/folders/19sQU6y-_PD2Nj9-wRdsICh7LUyxtspia | 
+          banggamenurai@gmail.com BANK_GAME — 
+          https://drive.google.com/drive/folders/1Gt21jF-4N-eOep5U_ZWjtYHqIjXSGvPa | 
+          emulatorgamenurai@gmail.com GAME_INDRAMAYU — 
+          https://drive.google.com/drive/folders/1AY5jD0BbOZMcUW2JTq5HpbNlZQ1l3P3n
+        </span>
+      </div>
+    </div>
+
+</div>
+
+<script>
+  // Tree toggle
+  const toggleBtn = document.getElementById('toggleTreeBtn');
+  const treeList = document.getElementById('treeList');
+  toggleBtn.addEventListener('click', () => {
+    if(treeList.style.display === 'none'){
+      treeList.style.display = 'block';
+      toggleBtn.textContent = 'Sembunyikan Tree Guard';
+      toggleBtn.setAttribute('aria-expanded', 'true');
+    } else {
+      treeList.style.display = 'none';
+      toggleBtn.textContent = 'Tampilkan Tree Guard';
+      toggleBtn.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  // Rating stars interaction
+  const stars = document.querySelectorAll('#ratingStars span');
+  let selectedRating = 0;
+  stars.forEach(star => {
+    star.addEventListener('click', () => {
+      selectedRating = parseInt(star.getAttribute('data-value'));
+      updateStars();
+    });
+    star.addEventListener('keydown', (e) => {
+      if(e.key === 'Enter' || e.key === ' '){
+        e.preventDefault();
+        selectedRating = parseInt(star.getAttribute('data-value'));
+        updateStars();
+      }
+    });
+  });
+  function updateStars(){
+    stars.forEach(star => {
+      let starVal = parseInt(star.getAttribute('data-value'));
+      if(starVal <= selectedRating){
+        star.classList.add('selected');
+        star.setAttribute('aria-checked','true');
+      } else {
+        star.classList.remove('selected');
+        star.setAttribute('aria-checked','false');
+      }
+    });
+  }
+
+  // Comment submission
+  const commentForm = document.getElementById('commentForm');
+  const commentsList = document.getElementById('commentsList');
+
+  commentForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    const name = this.name.value.trim();
+    const comment = this.comment.value.trim();
+    if(name && comment && selectedRating > 0){
+      addComment(name, comment, selectedRating);
+      this.reset();
+      selectedRating = 0;
+      updateStars();
+    } else if(selectedRating === 0){
+      alert('Mohon beri rating sebelum mengirim komentar.');
+    }
+  });
+
+  function addComment(name, comment, rating){
+    const div = document.createElement('div');
+    div.classList.add('comment-item');
+    let starsText = '⭐'.repeat(rating);
+    div.innerHTML = `<b>${name}</b> ${starsText}<br>${comment}`;
+    commentsList.prepend(div);
+  }
+</script>
+
+</body>
+</html>
