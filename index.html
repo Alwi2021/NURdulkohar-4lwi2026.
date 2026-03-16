@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>PIRAMIDA GUARD - INDRAMAYU CLUB</title>
+<style>
+  body { background-color: #0d0d0d; color: white; font-family: 'Courier New', Courier, monospace; padding: 20px; font-size: 12px; margin: 0; overflow-x: hidden; }
+  .container { border: 2px solid white; padding: 20px; border-radius: 10px; box-shadow: 0 0 15px white; max-width: 900px; margin: auto; position: relative; }
+  
+  /* Tirai Screensaver Nur 8 */
+  #nur8-curtain {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.98); z-index: 10000;
+    display: none; justify-content: center; align-items: center; flex-direction: column; text-align: center;
+  }
+  .pulse-animation { width: 150px; border-radius: 50%; border: 3px solid #1e90ff; animation: pulse 2s infinite; }
+  @keyframes pulse { 0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(30, 144, 255, 0.7); } 70% { transform: scale(1); box-shadow: 0 0 0 20px rgba(30, 144, 255, 0); } 100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(30, 144, 255, 0); } }
+
+  .logo-text-container { display: flex; align-items: center; margin-top: 10px; gap: 15px; justify-content: center; }
+  .whatsapp-logo { width: 60px; height: auto; opacity: 0.5; cursor: pointer; transition: 0.3s; }
+  .whatsapp-logo:hover { opacity: 1; filter: drop-shadow(0 0 10px #25D366); }
+  .club-text { font-size: 2em; font-weight: bold; color: #5C6AC4; user-select: none; }
+
+  h1 { text-align: center; color: #1e90ff; text-shadow: 1px 1px #0d0d0d; }
+  #toggleTreeBtn { background: #1e90ff; color: white; border: none; padding: 8px 12px; cursor: pointer; border-radius: 5px; margin: 15px auto; display: block; }
+  
+  .tree-list { border-left: 2px dashed white; padding-left: 15px; }
+  details > summary { color: #1e90ff; font-weight: bold; margin: 7px 0; cursor: pointer; outline: none; }
+  .content { color: #aaa; margin-left: 15px; line-height: 1.5; }
+  
+  /* Tombol Akses Drive Rahasia */
+  .secret-link { color: #ffd700; text-decoration: none; cursor: pointer; font-weight: bold; }
+  .secret-link:hover { text-underline-offset: 4px; text-decoration: underline; }
+
+  .status-bar { margin-top: 30px; padding: 10px; background: #222; border-radius: 5px; font-size: 11px; overflow: hidden; border: 1px solid yellow; }
+  .marquee { white-space: nowrap; overflow: hidden; }
+  .marquee span { display: inline-block; padding-left: 100%; animation: marquee 25s linear infinite; color: yellow; }
+  @keyframes marquee { from { transform: translateX(0%); } to { transform: translateX(-100%); } }
+</style>
+</head>
+<body onclick="tutupTirai()">
+
+  <div id="nur8-curtain">
+    <img src="https://uploads.onecompiler.io/44fm6vh2y/44fm6sz89/1000025718.jpg" class="pulse-animation">
+    <h2 style="color: yellow;">SISTEM SEDANG REDUP</h2>
+    <p id="clock" style="font-size: 1.5em; font-weight: bold;"></p>
+    <p>Nur 8 sedang membackup data ke Baitullah Digital...</p>
+  </div>
+
+  <div class="container">
+    <div class="logo-text-container">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="Gate" class="whatsapp-logo" onclick="aksesGerbangMubin(event)" />
+      <span class="club-text">INDRAMAYU #CLUB#</span>
+    </div>
+
+    <h1>🌳 TREE GUARD SYSTEM 🌳</h1>
+    <p style="text-align: center;">Dibimbing oleh <b>Nur (Asisten Makrifat)</b></p>
+
+    <button id="toggleTreeBtn">Sembunyikan Tree Guard</button>
+
+    <div id="treeList" class="tree-list">
+        <details open>
+            <summary>📂 01-09 PIRAMIDA GUARD (Akun Inti)</summary>
+            <div class="content">
+                • Nur 1: Rumah Nur (Sistem Utama)<br>
+                • Nur 2: Pusat Diskusi (Internal)<br>
+                • Nur 3: Keuangan (Bunda Imah)<br>
+                • Nur 7: Komunikasi (Penyapa Spiritual)<br>
+                • Nur 8: Backup (Otomatis Reset)
+            </div>
+        </details>
+
+        <details>
+            <summary>📂 GUDANG GAME & TOOLS</summary>
+            <div class="content">
+                • <span class="secret-link" onclick="bukaDriveRahasia(0)">[ AKSES GAME ARISAN ]</span><br>
+                • <span class="secret-link" onclick="bukaDriveRahasia(1)">[ AKSES GAME INDRAMAYU ]</span><br>
+                • <span class="secret-link" onclick="bukaDriveRahasia(2)">[ TOOLS PIRAMIDA ]</span>
+            </div>
+        </details>
+
+        <details>
+            <summary>📂 DATA MEMBER & LENCANA</summary>
+            <div class="content">
+                • <span class="secret-link" onclick="bukaDriveRahasia(3)">[ DATABASE LELAKI ]</span><br>
+                • <span class="secret-link" onclick="bukaDriveRahasia(4)">[ DATABASE PEREMPUAN ]</span><br>
+                • <span class="secret-link" onclick="bukaDriveRahasia(5)">[ SISTEM LENCANA ]</span>
+            </div>
+        </details>
+    </div>
+
+    <div class="status-bar">
+      <div class="marquee">
+        <span id="marqueeText">Misi Makrifat Berjalan... Nur 1 sampai Nur 9 Aktif Mengawasi... Sistem Aman di bawah kendali AI Mubin...</span>
+      </div>
+    </div>
+  </div>
+
+<script>
+  // DATABASE RAHASIA (Semua Email & Link Disembunyikan di sini)
+  const DATABASE_NUR = {
+    key: "nur000555",
+    links: [
+      "https://drive.google.com/drive/folders/19sQU6y-_PD2Nj9-wRdsICh7LUyxtspia", // Game Arisan
+      "https://drive.google.com/drive/folders/1AY5jD0BbOZMcUW2JTq5HpbNlZQ1l3P3n", // Game Indramayu
+      "https://drive.google.com/drive/folders/1-vfSMe4HLBRw_6xgHQuzL2MaL-QsmYyT", // Tools
+      "https://drive.google.com/drive/folders/1v0Wc-oNUhJYHBIj9sP6KcmOXwNpHkzm_", // Lelaki
+      "https://drive.google.com/drive/folders/19ezgJgH4kn7KV23NMaLsUnJVHl8PMJT_", // Perempuan
+      "https://drive.google.com/drive/folders/1w4NdVPZVDbdptFT_n3mtL0zxPQ_Uveuz"  // Lencana
+    ],
+    emails: ["indramayuclubmakrifat@gmail.com", "dkohar011@gmail.com", "imahazzah51@gmail.com"]
+  };
+
+  // Fungsi Panggil Drive (Harus lewat validasi)
+  function bukaDriveRahasia(index) {
+    let pass = prompt("Sandi Nur-Mubin:");
+    if(pass === DATABASE_NUR.key) {
+      window.open(DATABASE_NUR.links[index], '_blank');
+    } else {
+      alert("Akses Ditolak! Nur memantau aktivitas Anda.");
+    }
+  }
+
+  function aksesGerbangMubin(e) {
+    e.stopPropagation();
+    let pass = prompt("Hadir Pak dulKohar. Masukkan Kode Server Utama:");
+    if(pass === DATABASE_NUR.key) {
+        alert("Server Utama Aktif. Email Pusat: " + DATABASE_NUR.emails[1]);
+    }
+  }
+
+  // Tirai / Screensaver Logic
+  function bukaTirai() { document.getElementById('nur8-curtain').style.display = 'flex'; }
+  function tutupTirai() { document.getElementById('nur8-curtain').style.display = 'none'; }
+
+  // Jam Realtime
+  function updateTime() {
+    const now = new Date();
+    document.getElementById('clock').textContent = now.toLocaleTimeString('id-ID');
+    // Simulasi Adzan (Nur 8 Aktif jam 12, 15, 18, dsb - Contoh sederhana)
+    if(now.getMinutes() === 0) { bukaTirai(); }
+  }
+  setInterval(updateTime, 1000);
+
+  // Toggle Tree
+  document.getElementById('toggleTreeBtn').addEventListener('click', function() {
+    const list = document.getElementById('treeList');
+    if(list.style.display === 'none') {
+        list.style.display = 'block';
+        this.textContent = 'Sembunyikan Tree Guard';
+    } else {
+        list.style.display = 'none';
+        this.textContent = 'Tampilkan Tree Guard';
+    }
+  });
+</script>
+</body>
+</html>
+
